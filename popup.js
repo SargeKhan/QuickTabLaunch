@@ -19,7 +19,7 @@ function saveURL(){
                                 }                            
                                });
                           });
-    console.log(alltabs);
+    goBack();
 }
 function openURL(){
 	console.log("In open URL");
@@ -54,23 +54,28 @@ function editList()
     var self= this;
     var body= document.getElementById("body");
     var bodyData="";
-   chrome.storage.local.get("urls", function(vb){
+    chrome.storage.local.get("urls", function(vb){
         for(list in vb.urls){
             
             if(self.id==(list+ "_e"))
             {   
                 console.log("List iS:" + list);
-                bodyData= "<h3 id="+ list+"_h>" + list +"</h3>";
+		name = list.toUpperCase();
+                bodyData= '<<div id="'+ list+'_h" class="lead"> ' + name +"</div>";
                 var it=0;
 		if(vb.urls[list].length==0)
 	   		bodyData= bodyData+ "<div> This list is empty</div>";
                 vb.urls[list].forEach(function(obj){
                         console.log(obj.length);
                         var c = obj;
+			c = c.substring(0, 30)
                         var dots= "...";
                         c= c+ dots;
                         console.log(c);
-                        bodyData=  bodyData+"<div id=\""+it+ "\">"+c+ "<button class=\"btn btn-danger\" id=\"deleteB_"+it+"\"> Delete </button> </br></div>";
+
+                        bodyData=  bodyData+'<div class="row" id="'+it+'"> <div id="'+it+ '_div" class= "col-xs-10">'+c+' </div> <a href="#" id="deleteB_'+it+ '"class="col-xs-2"> <span  class="glyphicon glyphicon-remove-circle"> </span> </a> </div>'  
+
+
                         console.log("Iteration: \n"+bodyData);
                     it++;
                 });
@@ -127,7 +132,9 @@ function createTable(){
             vb={'urls':{"defaults": []}};
         }
         for(var x in vb.urls) {
-            tableData=tableData+  "<tr><td align=\"center\"><button class=\"btn btn-default\" style=\"width:100%\" id=\""+x+"\">"+x+"</a></td><td> <button class=\"btn btn-success\" id=\""+x+"_s\"> Add Current Page</button></td><td><button class=\"btn btn-info\" id=\""+x+"_e\">Edit List</button></td></tr>";
+            tableData=tableData+  '<div class="row container"><button class="btn btn-default col-xs-9" id="'+x+'">'+x+'</button>' +
+				'<a href="#" class="col-xs-1" id="'+x+'_s"><span style="color:green"class="glyphicon glyphicon-plus"></span> </a>' +
+				'<a href="#" class="col-xs-1" id="'+x+'_e"><span style="color:red" class="glyphicon glyphicon-edit"></span> </a></div>';
         }
         tab.innerHTML= tableData;
         
