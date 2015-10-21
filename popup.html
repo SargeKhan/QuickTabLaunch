@@ -1,31 +1,28 @@
 <!doctype html>
 <html>
 
-    <head>
-    <title>Getting Started Extension's Popup</title>
+<head>
+<title>Quick Tab Launcher!</title>
 <style>
-   body{
-    min-width: 300px;
+body{
+	min-width: 300px;
 
-   }
-    table{
-        min-width: 300px;
-    }
+}
 </style>
-  </head>
-    <body class="pure-body">
-    	<div align="center" style=" margin: 10px; ">
-	    <img src="icon.png" alt="QuickTab Launcher">
-    	</div>
-        <table class= "pure-table" id="tab">
-        </table>
-	<br>
-	<br>
-	<input placeholder="Create New list" style="width:100%"type="text" id="listName"/> 
-	<button class="btn btn-block" id= "createList">
-		Create!</button>
-	<div id="body"></div>
-	</body>
-<script src="popup.js"></script>
+</head>
+<body class="container-fluid">
+<div align="center" style=" margin: 10px; ">
+	<img src="icon.png" alt="QuickTab Launcher">
+</div>
+
+<div id="tab"></div>
+</br>
+<input placeholder="Create New list" maxlength="30" style="width:100%"type="text" id="listName"/> 
+<button class="btn btn-block" id= "createList">
+	Create!</button>
+</br>
+<div id="body"></div>
+
+</body> <script src="popup.js"></script>
 <link rel="stylesheet" type="text/css" href="bootstrap.min.css"/>
 </html>
